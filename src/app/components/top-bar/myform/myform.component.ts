@@ -4,6 +4,7 @@ import {AppComponent} from '../../../app.component';
 import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
+import {TileClass} from '../../../tile-class';
 
 @Component({
   selector: 'app-myform',
@@ -34,6 +35,7 @@ export class MyformComponent implements OnInit {
     {text: '12', rating: 8,  cols: 3, rows: 3, color: 'lightpink', download: 'www.dl.com'},
     {text: '13', rating: 8,  cols: 3, rows: 3, color: '#DDBDF1', download: 'www.dl.com'},
   ];
+  mySearchOptions = [{text:'abc'},{text:'def'},{text:'a1'},{text:'d1'},{text:'a2'},{text:'d2'}];
   ngOnInit() {
     this.filteredOptions = this.myControl.valueChanges
       .pipe(
@@ -42,7 +44,8 @@ export class MyformComponent implements OnInit {
       );
   }
   private _filter(value: string): any[] {
-    return this.tiles.filter((s) => new RegExp(value, 'gi').test(s.text));
+    return this.mySearchOptions.filter((s) => new RegExp(value, 'gi').test(s.text));
+    //return this.testTiles.filter((s) => new RegExp(value, 'gi').test(s.name));
   }
 
   someAction() {
