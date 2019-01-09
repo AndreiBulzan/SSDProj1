@@ -4,7 +4,7 @@
 <!--<div id="myp4"><button (click)="onLogout()" id="myp3bt" [style.z-index]="getStyle()">Logout</button></div>-->
 <input id="yourid" [(ngModel)]="usid"  [value]="usid" [style.z-index]="getStyle()" [style.opacity]="z2">
 <div id="loggedAs">{{loggedInUser}}</div>
-<input id="yourpass"  [(ngModel)]="pwd" [value]="pwd" [style.z-index]="getStyle()" [style.opacity]="z2">
+<input id="yourpass"  type="password"[(ngModel)]="pwd" [value]="pwd" [style.z-index]="getStyle()" [style.opacity]="z2">
 <div id="upload"><a (click)="callParent4()" onclick="return false;" href="">Upload</a></div>
 
 <!--<div id="upload">

@@ -1,7 +1,7 @@
 
-<body>
+<body onunload="myfct2()">
 <!--<div id="Razvan">
-  <ng-form method="POST" enctype="multipart/form-data" action="http://localhost:7070/">
+  <ng-form method="POST" enctype="multipart/form-data" action="http://haurtorrent.herokuapp.com/">
     <table>
       <tr><td>File to upload:</td><td><input type="file" name="file" /></td></tr>
       <tr><td></td><td><input type="submit" value="Upload" /></td></tr>
@@ -51,9 +51,9 @@
 
 </svg>
 
-<app-top-bar  [style.z-index]="getStyle()" (myUsersEvent)="getUserObjects($event)" (myLogEvent)="loggedIn($event)" (myEventUpload)="myUploadFct($event)" (myEventGetStartTiles)="firstTiles($event)" (myEventForwarded)="getSearchedObjects($event)" (myEvent)="getSpecStyle($event)"></app-top-bar>
+<app-top-bar  [style.z-index]="getStyle()" (myUsersEvent)="getUserObjects()" (myLogEvent)="loggedIn($event)" (myEventUpload)="myUploadFct($event)" (myEventGetStartTiles)="firstTiles($event)" (myEventForwarded)="getSearchedObjects($event)" (myEvent)="getSpecStyle($event)"></app-top-bar>
 <div id="idnews" [style.z-index]="getStyle()">News</div>
-<div id="myp3"><button (click)="onLeaveAdmin()" id="myp3bt">Return to login</button></div>
+<div id="myp3"><button (click)="onLeaveAdmin($event)" id="myp3bt">Return to login</button></div>
 <app-news [style.z-index]="getStyle()" (myDlEvent)="doNewsDl($event)"></app-news>
 <!--
 <app-user></app-user>
@@ -66,7 +66,7 @@
 <mat-form-field><input [(ngModel)]="myVar" matInput placeholder="Search"> </mat-form-field>
 </div>
 -->
-<!--
+
 <mat-grid-list cols="11" rowHeight="100px" [style.z-index]="getStyle()">
   <mat-grid-tile
     *ngFor="let tile of actualTiles"
@@ -81,8 +81,8 @@
     <div id="numberDownloads1">No. Dl</div>
   </mat-grid-tile>
 </mat-grid-list>
--->
 
+<!--
 <mat-grid-list cols="11" rowHeight="100px" [style.z-index]="getStyle()">
   <mat-grid-tile
     *ngFor="let tile of tiles"
@@ -97,6 +97,7 @@
     <div id="numberDownloads1">No. Dl</div>
   </mat-grid-tile>
 </mat-grid-list>
+-->
 <!--
 <mat-grid-list id="adminlist" cols="11" rowHeight="100px" [style.z-index]="getStyle2()">
   <mat-grid-tile id="admintiles"
@@ -105,7 +106,7 @@
                  [rowspan]="colsAndRows">
     <p class="tile_p"><a target="_blank">{{tile.text}}</a></p>
     <mat-button-toggle (click)="doDownload2()">{{downloadNews}}</mat-button-toggle>
-    <div id="isUserBanned">IsBanned:1</div>
+    <div id="isUserBanned">IsBanned:{{myBool}}</div>
   </mat-grid-tile>
 </mat-grid-list>
 -->
@@ -117,16 +118,17 @@
                  [rowspan]="colsAndRows">
     <p class="tile_p"><a target="_blank">{{tile.userName}}</a></p>
     <mat-button-toggle (click)="banUser(tile)">{{downloadNews}}</mat-button-toggle>
-        <div id="isUserBanned">IsBanned:{{tile.isBanned}}</div>
+        <div id="isUserBanned">IsBanned:{{tile.banned}}</div>
   </mat-grid-tile>
 </mat-grid-list>
+
 
 <div id="minibkg"></div>
 <div id = "registerComponent" (click)="changeStyleRegister1()" [style.z-index]="getStyleRegister1()">Register</div>
 <div id = "actualRegister"  [style.z-index]="getStyleRegister2()">
   <input id="registerId"  [(ngModel)]="regId" [value]="regId">
-  <input id="registerPwd"  [(ngModel)]="regPwd" [value]="regPwd">
-  <input id="registerMail"  [(ngModel)]="regMail" [value]="regMail">
+  <input id="registerPwd" type="password"  [(ngModel)]="regPwd" [value]="regPwd">
+  <input id="registerMail" type="password" [(ngModel)]="regMail" [value]="regMail">
   <div id = "registerIdLabel">Id</div>
   <div id = "registerPwdLabel">Pwd</div>
   <div id = "registerMailLabel">Repeat Pwd</div>

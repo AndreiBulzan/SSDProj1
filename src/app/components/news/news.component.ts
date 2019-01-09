@@ -11,11 +11,11 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 export class NewsComponent implements OnInit {
   @Output() myDlEvent = new EventEmitter<string>();
   callParentDownload(name) {
-    this.myDlEvent.emit('http://localhost:7070/download?id=' + name.id);
+    this.myDlEvent.emit('http://haurtorrent.herokuapp.com/download?id=' + name.id);
   }
 heroes: string[] = [ 'Object1', 'Object2', 'Object3'];
 tiles: TileClass[];
-url = 'http://localhost:7070/';
+url = 'http://haurtorrent.herokuapp.com/';
 myids: string[] = [ 'idnews1', 'idnews2', 'idnews3'];
 rating = [1, 3, 5];
   constructor(private http: HttpClient) {
@@ -24,7 +24,7 @@ rating = [1, 3, 5];
 
   ngOnInit() {
     console.log('Trying to get news tiles too');
-      const geturl = 'http://localhost:7070/latest';
+      const geturl = 'http://haurtorrent.herokuapp.com/latest';
       this.http.get(geturl).subscribe(
         (res: any[]) => {
           console.log(res);
@@ -42,7 +42,7 @@ rating = [1, 3, 5];
   doNewDl( name )
   {
     this.callParentDownload(name);
-    //window.open('http://localhost:7070/download?id=' + name.id);
+    //window.open('http://haurtorrent.herokuapp.com/download?id=' + name.id);
   }
   doRate( name )
   {

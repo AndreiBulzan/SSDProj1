@@ -1,7 +1,7 @@
 export class User {
   userName: String;
   admin: boolean;
-  isBanned: boolean;
+  banned: boolean;
   constructor()
   {
 

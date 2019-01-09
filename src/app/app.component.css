@@ -172,18 +172,18 @@ app-top-bar:hover{
 {
   position: absolute;
   left:46%;
-  top:1%;
+  top:0.5%;
 }
 #myp3bt
 {
   background-color: #2ECC40;
   border: none;
   color: white;
-  padding: 15px 32px;
+  padding: 14px 30px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 15px;
   transition: 0.6s;
 }
 #myp3bt:hover
@@ -320,7 +320,7 @@ app-user
 {
   position: absolute;
   top:15%;
-  left:10%;
+  left:8%;
   transition: 0.6s;
   border-radius: 10px;
 }
@@ -338,7 +338,7 @@ app-user
 {
   position: absolute;
   top: 45%;
-  left:10%;
+  left:8%;
   transition: 0.6s;
   border-radius: 10px;
 }
@@ -347,7 +347,7 @@ app-user
 {
   position: absolute;
   top:75%;
-  left:10%;
+  left:8%;
   transition: 0.6s;
   border-radius: 10px;
 }
@@ -376,7 +376,7 @@ app-user
 {
   position: absolute;
   top:15%;
-  left:47%;
+  left:46%;
   font-family: arial, helvetica, serif;
   color: #0f0c29;
   font-size: 20px;
@@ -385,7 +385,7 @@ app-user
 {
   position: absolute;
   top: 45%;
-  left:47%;
+  left:46%;
   font-family: arial, helvetica, serif;
   color: #0f0c29;
   font-size: 20px;
@@ -395,7 +395,7 @@ app-user
   font-size: 20px;
   position: absolute;
   top:75%;
-  left:47%;
+  left:46%;
   font-family: arial, helvetica, serif;
 }
 #clickRegister
