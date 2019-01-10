@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, HostListener} from '@angular/core';
 import {User} from './user';
 import {TopBarComponent} from './components/top-bar/top-bar.component';
 /*import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -15,6 +15,12 @@ import {Observable} from 'rxjs';
   //directives: [TopBarComponent]
 })
 export class AppComponent {
+  @HostListener('window:beforeunload', [ '$event' ])
+  unloadHandler(event) {
+    this.myfct2();
+    console.log(event);
+    // ...
+  }
   actualTilesUsers: User[];
   actualTiles: TileClass[];
   // title = 'SSDProj';
@@ -89,6 +95,7 @@ export class AppComponent {
   }
   onFileChanged(event) {
     this.selectedFile = <File>event.target.files[0];
+    console.log('Hello');
   }
   onUpload() {
     const geturl = 'http://haurtorrent.herokuapp.com/api/banned';
@@ -247,13 +254,13 @@ doRate( name )
   this.http.get(geturl).subscribe(
     (res1: any) => {
       console.log(res1);
-      console.log(event);
+      //console.log(event);
       if((res1 === false) && (this.someoneLogged ===1))
   {
     console.log(name.rating);
-    const url = this.url + `api/rate?id=${1}&mark=${name.rating}`;
+    const url = this.url + `api/rate?id=${name.id}&mark=${name.rating}`;
     this.http.get(url).subscribe(
-      res => {
+      (res: any) => {
         console.log(res);
       }
     );
@@ -411,10 +418,11 @@ nextPg()
  }
  banUser(user)
  {
-   const geturl = 'http://haurtorrent.herokuapp.com/api/user/ban?userID=' + user.id;
+   const geturl = 'http://haurtorrent.herokuapp.com/api/user/ban?userID=' + user.userName;
    this.http.get(geturl).subscribe(
      (res: any[]) => {
        console.log(res);
+       this.getUserObjects();
      }
    );
  }

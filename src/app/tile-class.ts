@@ -7,6 +7,7 @@ export class TileClass {
   downloads: number;
   path: String;
   uploader: String;
+  //otherName: string;
   // uploader: User;
   // rating: Rating[];
   rating: number;

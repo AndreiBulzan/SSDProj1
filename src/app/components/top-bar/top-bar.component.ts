@@ -13,7 +13,12 @@ export class TopBarComponent implements OnInit {
   @Output() myEventUpload = new EventEmitter<string>();
   @Output() myLogEvent = new EventEmitter<boolean>();
   @Output() myUsersEvent = new EventEmitter<string>();
+  @Output() myRefreshEvent = new EventEmitter<string>();
   myAux = '';
+  callParentRefresh()
+  {
+    this.myRefreshEvent.emit();
+  }
   callParentLog()
   {
     this.myLogEvent.emit();
@@ -53,80 +58,90 @@ z2=1;
   }
 onLogin()
 {
-  if(this.isAuthenticated === 1) {
-    this.loggedInUser = '';
-    this.z2 = 1;
-    this.log = 'Login';
-    this.isAuthenticated = 0;
-    console.log("aaasd");
-    const geturl = 'http://haurtorrent.herokuapp.com/api/logout';
-    this.http.get(geturl).subscribe(
-      (res: any[]) => {
-        console.log(res);
-      }
-    );
+  const myurl = 'http://haurtorrent.herokuapp.com/api/loggedin';
+  this.http.get(myurl).subscribe(
+    (res1: any) => {
 
-    this.callParentLog();
-  }
-  else {
+
+      if ((this.isAuthenticated === 1) && (res1 !== null)) {
+        this.loggedInUser = '';
+        this.z2 = 1;
+        console.log('Logging out');
+        this.log = 'Login';
+        this.isAuthenticated = 0;
+        console.log("aaasd");
+        const geturl = 'http://haurtorrent.herokuapp.com/api/user/logout';
+        this.http.get(geturl).subscribe(
+          (res: any[]) => {
+            console.log(res);
+          }
+        );
+
+        this.callParentLog();
+        this.callParentRefresh();
+      } else {
 //this.usid="Logged";
 //this.pwd=" in";
-    console.log(this.usid);
-    console.log(this.pwd)
-    if (this.usid === 'Logged')
-      if (this.pwd === 'in') {
-        this.showUser();
-        this.log = 'Login';
-      }
-    if (this.usid === 'user1') {
-      if (this.pwd === 'pwd1') {
-        this.loggedInUser = 'Logged in as ' + this.usid;
-        this.z1 = -15;
-        this.z2 = 0;
-        this.log = 'Logout';
-        this.isAuthenticated = 1;
-        this.getStyle();
-        this.callParentLog();
-      }
-    }
+        console.log(this.usid);
+        console.log(this.pwd)
+        if (this.usid === 'Logged')
+          if (this.pwd === 'in') {
+            this.showUser();
+            this.log = 'Login';
+          }
+        if (this.usid === 'user1') {
+          if (this.pwd === 'pwd1') {
+            this.loggedInUser = 'Logged in as ' + this.usid;
+            this.z1 = -15;
+            this.z2 = 0;
+            this.log = 'Logout';
+            this.isAuthenticated = 1;
+            this.getStyle();
+            this.callParentLog();
+          }
+        }
 
 
-    const url = `http://haurtorrent.herokuapp.com/api/user/login/${this.usid}`;
-    const post = new HttpParams().set('password', this.pwd);
-    this.http.get(url, {params: post}).subscribe(
-      res => {
-        console.log(res);
-        const myurl = 'http://haurtorrent.herokuapp.com/api/loggedin';
-        this.http.get(myurl).subscribe(
-          (res1: any) => {
+        const url = `http://haurtorrent.herokuapp.com/api/user/login/${this.usid}`;
+        const post = new HttpParams().set('password', this.pwd);
+        this.http.get(url, {params: post}).subscribe(
+          res => {
+            console.log(res);
+            const myurl = 'http://haurtorrent.herokuapp.com/api/loggedin';
+            this.http.get(myurl).subscribe(
+              (res1: any) => {
 
-            console.log(res1);
-            if (res1 === null)
-              console.log('Bad user/pwd');
+                console.log(res1);
+                if (res1 === null)
+                  console.log('Bad user/pwd');
 
-            else {
-              if (res1.admin === true) {
-                this.loggeduser = res1.userName;
+                else {
+                  this.isAuthenticated = 1;
+                  if (res1.admin === true) {
+                    this.loggeduser = res1.userName;
 
-                //this.log = "Logout";
-                console.log(this.loggeduser);
-                this.isAuthenticated = 1;
-                this.callParent();
-              } else {
-                this.loggedInUser = 'Logged in as ' + res1.userName;
-                this.z1 = -15;
-                this.z2 = 0;
-                this.log = 'Logout';
-                this.isAuthenticated = 1;
-                this.getStyle();
-                this.callParentLog();
+                    //this.log = "Logout";
+                    console.log(this.loggeduser);
+                    this.isAuthenticated = 1;
+                    this.callParent();
+                  } else {
+                    this.loggedInUser = 'Logged in as ' + res1.userName;
+                    this.z1 = -15;
+                    this.z2 = 0;
+                    this.log = 'Logout';
+                    this.isAuthenticated = 1;
+                    this.getStyle();
+                    this.callParentLog();
+                    this.callParentRefresh();
+                  }
+                }
               }
-            }
+            );
           }
         );
       }
-    );
-  }
+    }
+  );
 
 }
 

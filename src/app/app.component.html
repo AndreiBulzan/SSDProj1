@@ -1,5 +1,5 @@
 
-<body onunload="myfct2()">
+<body>
 <!--<div id="Razvan">
   <ng-form method="POST" enctype="multipart/form-data" action="http://haurtorrent.herokuapp.com/">
     <table>
@@ -10,7 +10,7 @@
 </div>
 -->
 <div id="plswork2" [style.z-index]="getFakeStyle()">
-<input id = "upChoose" type="file" (change)="onFileChanged($event)">
+<input id = "upChoose" type="file"  (change)="onFileChanged($event)">
   <button id = "upButt" type = "button" (click)="onUpload()">Upload</button>
 </div>
 <link href='https://fonts.googleapis.com/css?family=Cabin+Condensed:700' rel='stylesheet' type='text/css'>
@@ -51,7 +51,7 @@
 
 </svg>
 
-<app-top-bar  [style.z-index]="getStyle()" (myUsersEvent)="getUserObjects()" (myLogEvent)="loggedIn($event)" (myEventUpload)="myUploadFct($event)" (myEventGetStartTiles)="firstTiles($event)" (myEventForwarded)="getSearchedObjects($event)" (myEvent)="getSpecStyle($event)"></app-top-bar>
+<app-top-bar  [style.z-index]="getStyle()" (myRefreshEvent)="firstTiles($event)" (myUsersEvent)="getUserObjects()" (myLogEvent)="loggedIn($event)" (myEventUpload)="myUploadFct($event)" (myEventGetStartTiles)="firstTiles($event)" (myEventForwarded)="getSearchedObjects($event)" (myEvent)="getSpecStyle($event)"></app-top-bar>
 <div id="idnews" [style.z-index]="getStyle()">News</div>
 <div id="myp3"><button (click)="onLeaveAdmin($event)" id="myp3bt">Return to login</button></div>
 <app-news [style.z-index]="getStyle()" (myDlEvent)="doNewsDl($event)"></app-news>
